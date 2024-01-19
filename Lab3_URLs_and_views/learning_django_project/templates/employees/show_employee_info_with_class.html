@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Showing info about Employee {{ employee_id }}:</h1>
+    <p>First Name: {{ employee.first_name }}</p>
+    <p>Last Name: {{ employee.last_name  }}</p>
+    <p>{{ employee.full_name }}</p>
+    <p>{{ employee.full_name|truncatechars:4 }}</p>
+    <p>{{ employee.full_name|truncatewords:1 }}</p>
+    <p>Employee has grades: {{ grades|join:", " }}</p>
+    {% if grades|length > 0 %}
+    <p>Count of grades: {{ grades|length }}</p>
+    {% endif %}
+    <p>Positive grades:</p>
+    {% for grade in grades %}
+    {% if grade > 0 %}
+    <p>Grade: {{ grade }}</p>
+    {% endif %}
+    {% endfor %}
+
+    {% for grade in empty_grades %}
+    {% empty %}
+    <p>Empty grade list</p>
+    {% endfor %}
+
+    <p>Today is {{ date|date:"D d M Y" }}</p>
+    <p>Employee's age: {{ employee.age|default:"Unspecified" }}</p>
+    {%  if employee.age  %}
+    <p>Employee specified age!</p>
+    {%  else  %}
+    <p>Employee did not specify age!</p>
+    {%  endif  %}
+
+    <p>Here are some URLs:</p>
+    
+    {% url 'grades' %}
+    {% for grade in grades %}
+    <p>
+    <a href="{% url 'grades' %}?grade={{  grade  }}">{{ grade }}</a>
+    </p>
+    {% endfor %}
+
+</body>
+</html>
