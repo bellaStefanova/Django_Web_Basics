@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add name</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        {{ department_form.as_p }}
+
+        <!-- 
+        <label for="name">Your name: </label>
+        <input type="text" id="name" name="name" maxlength="50" required>
+        <br> -->
+
+        <!-- Types of input fields -->
+        <!-- <p>Text field</p>
+        <input type="text">
+        <p>Number field</p>
+        <input type="number">
+        <p>URL field</p>
+        <input type="url">
+        <p>Email field</p>
+        <input type="email">
+        <p>Range field</p>
+        <input type="range">
+        <p>Password field</p>
+        <input type="password">
+        <p>Hidden field</p>
+        <input type="hidden">
+        <p>Radio button</p>
+        <input type="radio">
+        <p>Checkbox</p>
+        <input type="checkbox">
+        <p>Textarea</p>
+        <textarea></textarea>
+        <p>Selector</p>
+        <select>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select>
+        <p>Button</p> -->
+        <button>Submit</button>
+    </form>
+</body>
+</html>
+
