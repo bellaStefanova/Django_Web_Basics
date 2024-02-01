@@ -1,10 +1,33 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Index</title>
 </head>
 <body>
     <h1>It's working! You are {{ name }}</h1>
+
+</body>
+</html>
+ -->
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    <h1>It's working! You are {{ name }}</h1>
+    <p>
+        <h2>Employees:</h2>
+        <p>{{ employees }}</p>
+        <ul>
+            {% for emp in employees %}
+                <li>{{ emp.employee_name }} - {{ emp.department }}
+                <a href="{% url 'edit-employee' pk=emp.pk %}">Edit</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </p>
 
 </body>
 </html>

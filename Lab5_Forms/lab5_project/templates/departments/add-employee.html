@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add employee</title>
+</head>
+<body>
+    <h1>Hello</h1>
+    <form action="{% url 'index' %}" method="post">
+        {% csrf_token %}
+        {{ employee_form.as_p }}
+        <button>Submit</button>
+    </form>
+</body>
+</html>
+
