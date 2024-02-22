@@ -11,7 +11,6 @@ def validate_username(value):
 class Profile(models.Model):
     username = models.CharField(max_length=15,
                                 validators=[MinLengthValidator(2), validate_username])
-    
     email = models.EmailField()
     age = models.IntegerField(null=True, blank=True,
                               validators=[MinValueValidator(0)])

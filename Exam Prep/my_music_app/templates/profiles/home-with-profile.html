@@ -1,40 +1,35 @@
 {% extends "base.html" %}
-{% block styles %}
-<link rel="stylesheet" href="/static/css/style.css" />
-{% endblock %}
-
 
 {% block content %}
 <!-- Main Content -->
 <!-- Catalog with Albums-->
-<section id="catalogPage">
-  {% if not added_albums %}
-  <p>No Albums in Catalog!</p>
-  {% else %}
+  <section id="catalogPage">
+    {% if not added_albums %}
+      <p>No Albums in Catalog!</p>
+    {% else %}
 
-  <h1>All Albums</h1>
+      <h1>All Albums</h1>
 
-  {% for album in added_albums %}
+      {% for album in added_albums %}
 
-  <div class="card-box">
-    <img src="{{ album.image_url }}" alt="Cover Image" />
-    <div>
-      <div class="text-center">
-        <p class="name">Album: {{ album.album_name }}</p>
-        <p class="artist">Artist: {{ album.artist }}</p>
-        <p class="genre">Genre: {{ album.genre }}</p>
-        <p class="price">Price: ${{ album.price }}</p>
-      </div>
-      <div class="btn-group">
+        <div class="card-box">
+          <img src="{{ album.image_url }}" alt="Cover Image" />
+          <div>
+            <div class="text-center">
+              <p class="name">Album: {{ album.album_name }}</p>
+              <p class="artist">Artist: {{ album.artist }}</p>
+              <p class="genre">Genre: {{ album.genre }}</p>
+              <p class="price">Price: ${{ album.price }}</p>
+            </div>
+            <div class="btn-group">
+              <a href="{% url 'album_details' pk=album.pk %}">Details</a>
+            </div>
+          </div>
+        </div>
 
-        <a href="{% url 'album_details' pk=album.pk %}">Details</a>
-      </div>
-    </div>
-  </div>
+      {% endfor %}
 
-  {% endfor %}
-
-  {% endif %}
-</section>
+    {% endif %}
+  </section>
 
 {% endblock %}
