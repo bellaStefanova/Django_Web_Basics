@@ -1,16 +1,30 @@
 from django.db import models
 from django.core.validators import MinLengthValidator, MinValueValidator
-from django.forms import ValidationError
+from my_music_app.helpers.model_validators import validate_username
 
-def validate_username(value):
-    for s in value:
-        if not s.isalnum() and s not in ['_']:
-            raise ValidationError("Ensure this value contains only letters, numbers, and underscore.")
-        
-# Create your models here.
+
 class Profile(models.Model):
-    username = models.CharField(max_length=15,
-                                validators=[MinLengthValidator(2), validate_username])
-    email = models.EmailField()
-    age = models.IntegerField(null=True, blank=True,
-                              validators=[MinValueValidator(0)])
+    MIN_USERNAME_LENGTH = 2
+    MAX_USERNAME_LENGTH = 15
+
+    MIN_AGE_VALUE = 0
+
+
+    username = models.CharField(
+        max_length=MAX_USERNAME_LENGTH,
+        validators=[
+            MinLengthValidator(MIN_USERNAME_LENGTH), 
+            validate_username,
+        ],
+    )
+
+    email = models.EmailField(
+    )
+
+    age = models.IntegerField(
+        null=True, 
+        blank=True,
+        validators=[
+            MinValueValidator(MIN_AGE_VALUE),
+        ],
+    )

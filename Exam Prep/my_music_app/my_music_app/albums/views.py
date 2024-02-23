@@ -87,6 +87,7 @@ class DeleteAlbumView(views.DeleteView, GetProfileMixin, GetVisibleFieldsOfAlbum
         
         for field in fields:
             initial[field] = getattr(album, field)
+            
 
         return initial
     
@@ -95,8 +96,8 @@ class DeleteAlbumView(views.DeleteView, GetProfileMixin, GetVisibleFieldsOfAlbum
 
         fields = self.visible_fields
         form = super().get_form(form_class)
-
-        form.fields['genre'].widget.attrs['disabled'] = "disabled"
+        for field in fields:
+            form.fields[field].widget.attrs['disabled'] = "disabled"
         
         return form
     

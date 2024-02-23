@@ -44,7 +44,7 @@ class HomeView(views.FormView, GetProfileMixin):
 
 
 '''Profile details view on localhost:8000/profiles/details/'''
-class ProfileDetailsView(views.ListView, GetProfileMixin):
+class ProfileDetailsView(views.DetailView, GetProfileMixin):
 
     template_name = 'profiles/profile-details.html'
     model = Profile
@@ -58,6 +58,10 @@ class ProfileDetailsView(views.ListView, GetProfileMixin):
         context['albums_count'] = len(self.all_albums_of_user)
 
         return context
+    
+    def get_object(self, queryset=None):
+
+        return self.existing_profile
 
 
 '''Profile delete view on localhost:8000/profiles/delete/'''
