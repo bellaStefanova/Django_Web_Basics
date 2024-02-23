@@ -5,3 +5,5 @@ troubleshooting.docx
 *.sqlite3
 __pychache__
 *.pyc
+launch.json
+
