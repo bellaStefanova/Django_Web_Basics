@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="form-create-book">
+        <input type="text" id="title" name="title" placeholder="Book Title">
+        <input type="text" id="author" name="author" placeholder="Book Author">
+        <select name="genre" id="genre">
+            <option value="Fantasy">Fantasy</option>
+            <option value="SciFi">SciFi</option>
+        </select>
+        <button type="button" id="btn-submit">Add Book</button>
+        
+    </form>
+    <div>
+        <ul id="book-list">
+
+        </ul>
+    </div>
+
+    <script>
+        const renderList = function() {
+            fetch("{% url 'books' %}")
+                .then(res => res.json())
+                .then(bookList => {
+                    const items = [];
+                    for (const book of bookList) {
+                        items.push(`<li>${book.title}</li>`);
+                    }
+                    document.getElementById("book-list").innerHTML = items.join('');
+                });
+        };
+
+        renderList();
+
+        document.getElementById('btn-submit').addEventListener('click', (ev) => {
+            const csrftoken = '{{ csrf_token }}'
+            console.log(csrftoken); 
+            const data = {
+                'title': document.querySelector("#form-create-book input[name=title]").value,
+                'author': document.querySelector("#form-create-book input[name=author]").value,
+                'genre': document.querySelector("#form-create-book select[name=genre]").value,
+            };
+
+            fetch("{% url 'books' %}", {
+                body: JSON.stringify(data),
+                method: 'POST',
+                headers: {
+                    'content-Type': 'application/json',
+                    'X-CSRFToken': csrftoken,
+                },
+            })
+                .then(() => renderList())
+            ev.preventDefault();
+        })
+
+
+    </script>
+
+</body>
+
+</html>
