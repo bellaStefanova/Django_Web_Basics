@@ -3,12 +3,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from django.views import generic as views
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
 
 from .models import Book
 from .serializers import BookSerializer
 
 class IndexView(views.TemplateView):
     template_name = 'index.html'
+    
+def csrf_token_view(request):
+    return JsonResponse({'csrfToken': get_token(request)})
 
 class ListBooksView(APIView):
     def get(self, req):
